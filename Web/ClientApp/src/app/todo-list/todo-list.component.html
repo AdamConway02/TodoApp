@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md">
+        <h1 class="text-center">Todo List</h1>
+    </div>
+    <div class="col-md"></div>
+</div>
+
+
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md">
+
+        <!-- Table -->
+
+        <table class="todo-list table table-borderless">
+
+            <!-- Table Heading -->
+            <!-- 
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Done</th>
+                </tr>
+            </thead> -->
+
+            <!-- Table Body -->
+            <tbody>
+                <ng-container *ngFor="let item of todos">
+
+                <!-- View Item Template -->
+
+                <tr *ngIf="item.id != editItemId" [ngClass]="{'bg-isDone': item.isDone}">
+                    <td>{{item.name}}</td>
+                    <td class="text-right">
+                        <button class="btn" (click)="onClick_toggleItem(item)">
+                            <i [ngClass]="item.isDone? icons.checkboxChecked : icons.checkboxEmpty"></i>
+                        </button>
+                        <button class="btn" (click)="onClick_deleteItem(item.id)">
+                            <i [ngClass]="icons.delete"></i></button>
+                        <button class="btn" (click)="onClick_editItem(item.id)">
+                            <i [ngClass]="icons.edit"></i></button>
+                    </td>
+                </tr>
+
+                <!-- Edit Item Template -->
+                <tr *ngIf="item.id == editItemId" [formGroup]="formEditItem" [ngClass]="{'bg-isDone': item.isDone}">
+                    <td>
+                        <input type="text" (keydown.enter)="onKeydown_editItem_name()" formControlName="name"
+                            class="form-control">
+                    </td>
+                    <td>
+                        <button type="button" (click)="onSubmit_formEditItem()" class="btn btn-primary btn-block">Edit Item </button>
+                    </td>
+                </tr>
+                </ng-container>
+
+            </tbody>
+
+            <!-- Table Footer -->
+
+            <tfoot>
+                <tr [formGroup]="formAddItem">
+                    <td>
+                        <input type="text" (keydown.enter)="onKeydown_addItem_name()" formControlName="name"
+                            class="form-control">
+                    </td>
+                    <td>
+                        <button type="button" (click)="onSubmit_formAddItem()" class="btn btn-primary btn-block">Add
+                            Item</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="card"></div>
+    </div>
+    <div class="col-md"></div>
+</div>
+<hr>
+
+
+<!-- 
+<form [formGroup]="formAddItem" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="name" class="form-input">
+    <button type="submit" class="btn btn-primary">Add Item</button>
+</form> -->

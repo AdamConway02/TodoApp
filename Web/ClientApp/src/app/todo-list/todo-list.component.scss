@@ -1,0 +1,10 @@
+.todo-list {
+
+    tr.bg-isDone td {
+      background: #22dd72;
+    }
+
+    tbody tr td { 
+      border-bottom:1px solid #ccc;
+    }
+  }
